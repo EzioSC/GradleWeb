@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>注册新用户</title>
+
+<script type="text/javascript" th:src="@{/static/JS/jquery-3.3.1.js}"></script>
+<script type="text/javascript">
+$(function(){
+});
+function checkSubmit(){
+	var log = $('#loginid').val();
+	var pwd = $('#password').val();
+	var na = $('#name').val();
+	var user = {loginid:log,password:pwd,name:na};
+	$.ajax({
+		url:'/addUser',
+		data:user,
+		type:'POST', 
+		dataType:'json',
+		error:function(data){	
+			$('#msg').text(data.msg);
+		},
+		success:function(data){
+			$('#msg').text(data.msg);
+			setTimeout(function(){
+				$(location).attr('href', '/login')
+			},2000);
+		}
+
+	});
+}
+</script>
+</head>
+<body>
+	<div style="margin:auto; width: 300px ;height: 500px" >
+		<form name ="addUserFrom" id = "addUserFrom" method="post">
+			<div>
+				<label>账号名:</label><input id='loginid' name="loginid" type="text" /><br>
+				<label>密码:</label><input id='password' name='password' type="text" /><br>
+				<label>昵称</label><input id ='name'  name='name' type="text" /><br>
+			</div>
+			<!-- 保留验证码层 -->
+			<label id="msg"></label>
+				<div>
+					<input name="submit" type="button" value="提交" onclick="checkSubmit()" />
+					<input name="reset" type="reset" value="重置" />
+				</div>
+		</form>
+	</div>
+</body>
+</html>

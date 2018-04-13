@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>首页</title>
+<script type="text/javascript" th:src="@{/static/JS/jquery-3.3.1.js}" ></script>
+<script type="text/javascript">
+	function submit(){
+		
+		if($("#savecookie").is(":checked")){
+			$("#cool").val('on');
+		}
+		else{
+			$("#cool").val('off');
+		}
+	}
+</script>
+</head>
+
+
+<body>
+	<h1>hello word!!!</h1>>
+	<div>
+		<form th:action="@{loginUser}" method="post">
+			<span th:text="${msg}">错误信息</span><br>
+			<label>账号 :</label><input name = "loginid" type="text"  />
+			<label>密码:</label><input name = "password" type="text"  /><br>
+			<input type="submit" value="提交"  />
+			<input type="reset" value="重置" />
+			<input type="text" id ="cool" name="cool" value="off" style="display: none;"  />
+		</form>
+		<input id="savecookie"  name="savecookie" type = "checkbox" onchange="submit()" />
+		<label>30天免登陆！</label>
+		
+		<div>
+			<a th:href="@{toaddUser}" >注册！</a>
+		</div>
+	</div>	
+</body>
+</html>
